@@ -1,12 +1,15 @@
 # TTS Announce
 
 
-Automations often can be triggered unexpectedly. If an automation creates sound announcement (either just by playing a sound effect, or by  text-to-speech), it can be a problem if another automation is also triggered while the first one is still playing its sound, because the second sound will stop the first.
+Automations often can be triggered unexpectedly. If an automation creates sound announcement (either just by playing a sound effect, or by  text-to-speech), it can be a problem if another automation is also triggered while the first one is still playing, because then the second will stop the first sound.
 
-I couldn't find any media player capable of dynamic queues, that is the reason for this Appdaemon script.
+I couldn't find any media player capable of dynamic queues, hence this Appdaemon script. It calls HA API to generate mp3 from text, and from the length of that file it determines when will be the speaker free again. If another event comes in, it is scheduled to be played only after any earlier sound is completed. Appdaemon cannot create service callable from Home Assistant, but it can listen to events, which has the same result.
 
-Appdaemon cannot create service callable from Home Assistant, but it can listen to events, which has the same result.
+Because I use many sound effects played before TTS announcements (like a bell, a dog bark, etc.) events can have also a ```filename``` parameter beside ```message```, to specify the filename of the sound effect. 
 
+
+
+## Install
 
 Have this in appdeamon's config:
 
@@ -14,6 +17,8 @@ Have this in appdeamon's config:
 python_packages:
   - mutagen
 ```
+
+Create a long-lived token in Home Assistant, and copy its value either into apps.yaml, or into secrets.yaml.
 
 
 ## Example appdaemon/apps/apps.yaml
