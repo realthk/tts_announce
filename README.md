@@ -3,6 +3,10 @@
 
 Automations often can be triggered unexpectedly. If an automation creates sound announcement (either just by playing a sound effect, or by  text-to-speech), it can be a problem if another automation is also triggered while the first one is still playing its sound, because the second sound will stop the first.
 
+I couldn't find any media player capable of dynamic queues, that is the reason for this Appdaemon script.
+
+Appdaemon cannot create service callable from Home Assistant, but it can listen to events, which has the same result.
+
 
 Have this in appdeamon's config:
 
