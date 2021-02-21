@@ -30,53 +30,26 @@ tts_announce:
 
 Where 
 
-**speech_token**
+---
+Key | Required | Description | Default 
+------------ | ------------- | ------------- | ------------- 
+**speech_token** | True | a long lived token created in Home Assistant | None 
+**ha_url**|True |is how you access Home Assistant on the local network.  It is used to access the TTS API, and also as url for the files to be played | None 
+**tts_platform**|True|The same platform you specify in Home Assistant configuration.yaml under tts| None
+**tts_language**|True|Default language for TTS. Can specify a different for any event call|None
+**speaker**|True|Id of the media_player entity to play sounds on|None
+**night_volume**|No|Volume level between 0 and 1 for the night (22-05) When set to 0 or left out from apps.yaml, no volume change will take place|0
+**day_volume**|No|Volume level between 0 and 1 for the day (05-22) When set to 0 or left out from apps.yaml, no volume change will take place|0
+**debug**|No|Log every detail of processing in Appdaemon's log when set to **True**|False
+**extra_delay_if_sleeps**|No|Can be set to True for Google devices to have an extra 3 secs delay when the speaker is in "off" state, because it takes about 2 secs to wake it up|False
+**media_path**|No|Sound effect files local path|/local/media/
 
-is a long lived token created in Home Assistant. 
-It also can be placed in secrets.yaml and then have
+
+**speech_token** can also be placed in ```secrets.yaml``` with ```apps.yaml``` containing
+```
   speech_token: !secret speech_token
-in apps.yaml, just don't forget to restart Appdaemon after it, as it caches secrets.yaml
-
-**ha_url** 
-
-is how you access Home Assistant on the local network. 
-It is used to access the TTS API, and also as url for the files to be played
-
-
-**tts_platform**
-
-The same platform you specify in Home Assistant configuration.yaml under tts
-
-**tts_language**
-
-Default language for TTS. Can specify a different for any event call
-
-**speaker**
-
-Id of the media_player entity to play sounds on
-
-**night_volume**
-
-Volume level between 0 and 1 for the night (22-05)
-When set to 0 or left out from apps.yaml, no volume change will take place
-
-**day_volume**
-
-Volume level between 0 and 1 for the day (05-22)
-When set to 0 or left out from apps.yaml, no volume change will take place
-
-**debug**
-
-Log every detail of processing in Appdaemon's log when set to True
-
-**extra_delay_if_sleeps**
-
-Can be set to True for Google devices to have an extra 3 secs delay when the speaker is
-in "off" state, because it takes about 2 secs to wake it up
-
-
-Optionally **media_path:** can also be specified for the sound effect files. 
-When it is missing from apps.yaml, its default value is /local/media/
+```  
+just don't forget to restart Appdaemon after it, as it caches ```secrets.yaml```
 
 
 ## Using it from automations
